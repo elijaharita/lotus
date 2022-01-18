@@ -2616,6 +2616,8 @@ COMMANDS:
    reachability  Print information about reachability from the internet
    bandwidth     Print bandwidth usage information
    block         Manage network connection gating rules
+   stat          report resource stat for a scope
+   limit         get or set resource limit for a scope
    help, h       Shows a list of commands or help for one command
 
 OPTIONS:
@@ -2880,6 +2882,33 @@ USAGE:
    lotus net block list [command options] [arguments...]
 
 OPTIONS:
+   --help, -h  show help (default: false)
+   
+```
+
+### lotus net stat
+```
+NAME:
+   lotus net stat - report resource stat for a scope
+
+USAGE:
+   lotus net stat [command options] scope
+
+OPTIONS:
+   --help, -h  show help (default: false)
+   
+```
+
+### lotus net limit
+```
+NAME:
+   lotus net limit - get or set resource limit for a scope
+
+USAGE:
+   lotus net limit [command options] scope [limit]
+
+OPTIONS:
+   --set       set the limit for a scope (default: false)
    --help, -h  show help (default: false)
    
 ```

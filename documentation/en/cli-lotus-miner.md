@@ -1160,6 +1160,8 @@ COMMANDS:
    reachability  Print information about reachability from the internet
    bandwidth     Print bandwidth usage information
    block         Manage network connection gating rules
+   stat          report resource stat for a scope
+   limit         get or set resource limit for a scope
    help, h       Shows a list of commands or help for one command
 
 OPTIONS:
@@ -1424,6 +1426,33 @@ USAGE:
    lotus-miner net block list [command options] [arguments...]
 
 OPTIONS:
+   --help, -h  show help (default: false)
+   
+```
+
+### lotus-miner net stat
+```
+NAME:
+   lotus-miner net stat - report resource stat for a scope
+
+USAGE:
+   lotus-miner net stat [command options] scope
+
+OPTIONS:
+   --help, -h  show help (default: false)
+   
+```
+
+### lotus-miner net limit
+```
+NAME:
+   lotus-miner net limit - get or set resource limit for a scope
+
+USAGE:
+   lotus-miner net limit [command options] scope [limit]
+
+OPTIONS:
+   --set       set the limit for a scope (default: false)
    --help, -h  show help (default: false)
    
 ```
