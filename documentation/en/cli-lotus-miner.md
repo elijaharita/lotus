@@ -1160,8 +1160,8 @@ COMMANDS:
    reachability  Print information about reachability from the internet
    bandwidth     Print bandwidth usage information
    block         Manage network connection gating rules
-   stat          report resource stat for a scope
-   limit         get or set resource limit for a scope
+   stat          Report resource usage for a scope
+   limit         Get or set resource limits for a scope
    help, h       Shows a list of commands or help for one command
 
 OPTIONS:
@@ -1433,10 +1433,22 @@ OPTIONS:
 ### lotus-miner net stat
 ```
 NAME:
-   lotus-miner net stat - report resource stat for a scope
+   lotus-miner net stat - Report resource usage for a scope
 
 USAGE:
    lotus-miner net stat [command options] scope
+
+DESCRIPTION:
+   Report resource usage for a scope.
+
+  The scope can be one of the following:
+  - system        -- reports the system aggregate resource usage.
+  - transient     -- reports the transient resource usage.
+  - svc:<service> -- reports the resource usage of a specific service.
+  - proto:<proto> -- reports the resource usage of a specific protocol.
+  - peer:<peer>   -- reports the resource usage of a specific peer.
+  - all           -- reports the resource usage for all currently active scopes.
+
 
 OPTIONS:
    --help, -h  show help (default: false)
@@ -1446,10 +1458,23 @@ OPTIONS:
 ### lotus-miner net limit
 ```
 NAME:
-   lotus-miner net limit - get or set resource limit for a scope
+   lotus-miner net limit - Get or set resource limits for a scope
 
 USAGE:
    lotus-miner net limit [command options] scope [limit]
+
+DESCRIPTION:
+   Get or set resource limits for a scope.
+
+  The scope can be one of the following:
+  - system        -- reports the system aggregate resource usage.
+  - transient     -- reports the transient resource usage.
+  - svc:<service> -- reports the resource usage of a specific service.
+  - proto:<proto> -- reports the resource usage of a specific protocol.
+  - peer:<peer>   -- reports the resource usage of a specific peer.
+
+ The limit is json-formatted, with the same structure as the limits file.
+
 
 OPTIONS:
    --set       set the limit for a scope (default: false)

@@ -3840,9 +3840,6 @@ Response:
 ```json
 {
   "Memory": 123,
-  "MemoryFraction": 0,
-  "MinMemory": 0,
-  "MaxMemory": 0,
   "Streams": 3,
   "StreamsInbound": 1,
   "StreamsOutbound": 2,
@@ -3949,9 +3946,6 @@ Inputs:
   "string value",
   {
     "Memory": 123,
-    "MemoryFraction": 0,
-    "MinMemory": 0,
-    "MaxMemory": 0,
     "Streams": 3,
     "StreamsInbound": 1,
     "StreamsOutbound": 2,
