@@ -103,7 +103,7 @@ type Ensemble struct {
 	t            *testing.T
 	bootstrapped bool
 	genesisBlock bytes.Buffer
-	MN           mocknet.Mocknet
+	mn           mocknet.Mocknet
 	options      *ensembleOpts
 
 	inactive struct {
@@ -149,6 +149,11 @@ func NewEnsemble(t *testing.T, opts ...EnsembleOpt) *Ensemble {
 	}
 
 	return n
+}
+
+// Mocknet returns the underlying mocknet.
+func (n *Ensemble) Mocknet() mocknet.Mocknet {
+	return n.mn
 }
 
 // FullNode enrolls a new full node.
@@ -277,7 +282,7 @@ func (n *Ensemble) Start() *Ensemble {
 		// We haven't been bootstrapped yet, we need to generate genesis and
 		// create the networking backbone.
 		gtempl = n.generateGenesis()
-		n.MN = mocknet.New(ctx)
+		n.mn = mocknet.New(ctx)
 	}
 
 	// ---------------------
@@ -291,7 +296,7 @@ func (n *Ensemble) Start() *Ensemble {
 			node.FullAPI(&full.FullNode, node.Lite(full.options.lite)),
 			node.Base(),
 			node.Repo(r),
-			node.MockHost(n.MN),
+			node.MockHost(n.mn),
 			node.Test(),
 
 			// so that we subscribe to pubsub topics immediately
@@ -351,7 +356,7 @@ func (n *Ensemble) Start() *Ensemble {
 	n.inactive.fullnodes = n.inactive.fullnodes[:0]
 
 	// Link all the nodes.
-	err := n.MN.LinkAll()
+	err := n.mn.LinkAll()
 	require.NoError(n.t, err)
 
 	// ---------------------
@@ -524,7 +529,7 @@ func (n *Ensemble) Start() *Ensemble {
 			node.Repo(r),
 			node.Test(),
 
-			node.If(!m.options.disableLibp2p, node.MockHost(n.MN)),
+			node.If(!m.options.disableLibp2p, node.MockHost(n.mn)),
 
 			node.Override(new(v1api.FullNode), m.FullNode.FullNode),
 			node.Override(new(*lotusminer.Miner), lotusminer.NewTestMiner(mineBlock, m.ActorAddr)),
@@ -612,7 +617,7 @@ func (n *Ensemble) Start() *Ensemble {
 	n.inactive.miners = n.inactive.miners[:0]
 
 	// Link all the nodes.
-	err = n.MN.LinkAll()
+	err = n.mn.LinkAll()
 	require.NoError(n.t, err)
 
 	if !n.bootstrapped && len(n.active.miners) > 0 {
